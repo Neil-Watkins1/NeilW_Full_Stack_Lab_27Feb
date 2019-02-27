@@ -1,12 +1,17 @@
 <template lang="html">
-  <bookings-list :bookings="bookings" />
+  <div id="app">
 
+
+  <bookings-form />
+  <bookings-list :bookings="bookings" />
+</div>
 </template>
 
 
 <script>
 
 import bookingsList from './components/BookingsList';
+import bookingsForm from './components/BookingsForm';
 import { eventBus } from './main';
 
 export default {
@@ -17,6 +22,7 @@ export default {
     }
   },
   components: {
+    bookingsForm,
     bookingsList
   },
 
@@ -37,7 +43,7 @@ eventBus.$on('booking-deleted', id => this.deleteBooking(id));
       .then(bookings => this.bookings = bookings);
     },
     deleteBooking(id){
-      const index = this.bookings.findIndex((booking) =>
+      const index = this.bookings.findIndex((bookings) =>
     { return booking._id === id
     });
     this.bookings.splice(index, 1);
@@ -49,11 +55,10 @@ eventBus.$on('booking-deleted', id => this.deleteBooking(id));
 
 
 
-<style lang="css" scoped>
-</style>
 
 
 <style>
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -61,6 +66,15 @@ eventBus.$on('booking-deleted', id => this.deleteBooking(id));
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+html {
+  background: url('./assets/background.jpg') no-repeat;
+  height: 140%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 h1, h2 {
