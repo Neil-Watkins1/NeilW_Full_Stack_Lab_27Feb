@@ -1,11 +1,53 @@
 <template lang="html">
-  <h1>Hotel Bookings</h1>
+  <bookings-list :bookings="bookings" />
+
 </template>
 
+
 <script>
+
+import bookingsList from './components/BookingsList';
+import { eventBus } from './main';
+
 export default {
-}
+  name: 'app',
+  data() {
+    return {
+      bookings: []
+    }
+  },
+  components: {
+    bookingsList
+  },
+
+mounted(){
+  this.fetchData();
+
+  eventBus.$on('booking-added', booking =>
+this.bookings.push(booking))
+eventBus.$on('booking-deleted', id => this.deleteBooking(id));
+
+},
+
+
+  methods: {
+    fetchData(){
+      fetch("http://localhost:3000/api/bookings")
+      .then(res => res.json())
+      .then(bookings => this.bookings = bookings);
+    },
+    deleteBooking(id){
+      const index = this.bookings.findIndex((booking) =>
+    { return booking._id === id
+    });
+    this.bookings.splice(index, 1);
+    }
+  }
+
+};
 </script>
+
+
 
 <style lang="css" scoped>
 </style>
