@@ -43,7 +43,7 @@ eventBus.$on('booking-deleted', id => this.deleteBooking(id));
       .then(bookings => this.bookings = bookings);
     },
     deleteBooking(id){
-      const index = this.bookings.findIndex((bookings) =>
+      const index = this.bookings.findIndex((booking) =>
     { return booking._id === id
     });
     this.bookings.splice(index, 1);
@@ -52,8 +52,6 @@ eventBus.$on('booking-deleted', id => this.deleteBooking(id));
 
 };
 </script>
-
-
 
 
 

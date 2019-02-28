@@ -11,7 +11,7 @@ type="checkbox" name="checked_in" v-model="bookings.checked_in" />
     </p>
 
 
-    <button v-on:click="deleteBooking(bookings._id)">Remove Booking</button>
+    <button v-on:click="deleteBooking(booking._id)">Remove Booking</button>
 
   </div>
 
@@ -44,6 +44,10 @@ setCheckedIn: function() {
 }
 }
 </script>
+
+
+
+
 
 
 <style lang="css" scoped>
